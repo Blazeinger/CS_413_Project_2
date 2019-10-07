@@ -8,6 +8,7 @@ PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 
 PIXI.loader
   .add("assets.json")
+  .add("button.mp3")
   .load(loadMain);
 
 var stage_main = new PIXI.Container();
@@ -28,6 +29,7 @@ var back_button;
 var pitstop;
 var car;
 var credits_button;
+var button_sound;
 
 function loadMain()
 {
@@ -54,6 +56,8 @@ function loadMain()
 	credits_button.scale.y = 2;
 	credits_button.position.x = 210;
 	credits_button.position.y = 300;
+	
+	button_sound = PIXI.audioManager.getAudio("button.mp3");
 	
 	start_button.interactive = true;
 	start_button.on('mousedown', mouseHandler);
@@ -92,6 +96,8 @@ function loadGame()
 	pitstop.position.x = 350;
 	pitstop.position.y = 300;
 	
+	button_sound = PIXI.audioManager.getAudio("button.mp3");
+	
 	pitstop.interactive = true;
 	pitstop.on('mousedown', mouseHandler);
 	
@@ -118,6 +124,8 @@ function loadGuide()
 	back_button.position.x = 220;
 	back_button.position.y = 310;
 	
+	button_sound = PIXI.audioManager.getAudio("button.mp3");
+	
 	back_button.interactive = true;
 	back_button.on('mousedown', mouseHandler);
 	
@@ -141,6 +149,8 @@ function loadCredits()
 	back_button.position.x = 200;
 	back_button.position.y = 300;
 	
+	button_sound = PIXI.audioManager.getAudio("button.mp3");
+	
 	back_button.interactive = true;
 	back_button.on('mousedown', mouseHandler);
 	
@@ -163,6 +173,8 @@ function loadEnd()
 	back_button.position.x = 200;
 	back_button.position.y = 300;
 	
+	button_sound = PIXI.audioManager.getAudio("button.mp3");
+	
 	back_button.interactive = true;
 	back_button.on('mousedown', mouseHandler);
 	
@@ -174,6 +186,8 @@ function loadEnd()
 
 function mouseHandler(trigger)
 {
+	button_sound.play();
+	
 	if(trigger.target == start_button)
 	{
 		stage_master.removeChild(stage_main);
